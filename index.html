@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Конрольная работа № 4 JavaScript</title>
+</head>
+<body>
+
+	<script>
+		
+		// Рекурсия, setInterval, setTimeout
+		// Задание 1
+
+		// function getNumLine(n) {
+		// 	if (n == 1) return n.toString();
+		// 	else return getNumLine(n - 1) + " " + n;
+		// }
+
+		// document.getElementById("out").innerHTML = getNumLine(5);
+
+        // Задание 2
+        // Вариант 1
+
+		function sumTo(n) {
+		  var sum = 0;
+		  for (var i = 1; i <= n; i++) {
+		    sum += i;
+		  }
+		  return sum;
+		}
+
+		alert(sumTo(100));
+
+        // Вариант 2
+
+		function sumTo(n) {
+		  if (n == 1) return 1;
+		  return n + sumTo(n - 1);
+		}
+
+		alert(sumTo(100));
+
+
+		// Задание 3
+		// Вариант 1
+
+		function printNumbersInterval() {
+		  var i = 1;
+		  var timerId = setInterval(function() {
+		    console.log(i);
+		    if (i == 20) clearInterval(timerId);
+		    i++;
+		  }, 100);
+		}
+
+		printNumbersInterval();
+
+		// Вариант 2
+
+		function printNumbersTimeout20_100() {
+		  var i = 1;
+		  var timerId = setTimeout(function go() {
+		    console.log(i);
+		    if (i < 20) setTimeout(go, 100);
+		    i++;
+		  }, 100);
+		}
+
+		printNumbersTimeout20_100();
+
+
+		// Объекты
+		// Задание 1
+
+		"use strict";
+
+		var salaries = {
+		  "Вася": 100,
+		  "Петя": 300,
+		  "Даша": 250
+		};
+
+		var sum = 0;
+		for (var name in salaries) {
+		  sum += salaries[name];
+		}
+
+		alert(sum);
+
+		// Задание 2
+
+		"use strict";
+
+		var salaries = {
+		  "Вася": 100,
+		  "Петя": 300,
+		  "Даша": 250
+		};
+
+		var max = 0;
+		var maxName = "";
+		for (var name in salaries) {
+		  if (max < salaries[name]) {
+		    max = salaries[name];
+		    maxName = name;
+		  }
+		}
+
+		alert(maxName || "нет сотрудников");
+
+
+		// Даты
+		// Задание 1
+
+		var date = new Date();
+		var hour = date.getHours();
+		var minutes = date.getMinutes();
+		var seconds = date.getSeconds();
+
+		if (minutes < 10) {
+		 minutes = "0" + minutes;
+		}
+
+		if (seconds < 10) {
+		 seconds = "0" + seconds;
+		}
+
+		document.write("Текущее время: " + hour + ":" + minutes + ":" + seconds + "<br/>");
+
+		// Задание 2
+
+		var days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница","Суббота"]; 
+		var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+		var day_now = new Date();
+		var milliNow = day_now.getTime();
+
+		function now_date(N) {
+			var day_after_N = new Date(1000 * 60 * 60 * 24 * N); 
+			var milliN = day_after_N.getTime();
+			var milliNowPlusN = new Date(milliNow + milliN);
+			document.write("Через " + N + " дней будет вот такая дата: <p>");
+			document.write("День недели: " + days[milliNowPlusN.getDay()] + "<br>");
+			document.write("Число: " + milliNowPlusN.getDate() + "<br>");
+			document.write("Месяц: " + months[milliNowPlusN.getMonth()] + "<br>");
+			document.write("Год: " + milliNowPlusN.getFullYear() + "<br>");
+		}
+
+		var user = prompt("Введите число от 1 до 1000");
+		var n = Math.round(user);
+
+		if (n > 1 && n < 1000) {
+			now_date(n);
+		} else {
+			document.write("Вы ввели не число, или число за пределами интервала от 1 до 1000");
+		}
+
+	</script>
+	
+</body>
+</html>
